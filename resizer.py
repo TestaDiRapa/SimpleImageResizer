@@ -1,4 +1,5 @@
 from PIL import Image
+from shutil import copyfile
 import os
 import shutil
 import sys
@@ -10,10 +11,12 @@ def resize_recursive(in_path, out_path):
         if os.path.isdir(in_path+"/"+file):
             os.mkdir(out_path+"/"+file)
             resize_recursive(in_path+"/"+file, out_path+"/"+file)
-        if file[-3:] == "png":
+        elif file[-3:] == "png":
             image = Image.open(in_path+"/"+file)
             image.thumbnail(ratio)
             image.save(out_path+"/"+file, "PNG")
+        else:
+            copyfile(in_path+"/"+file, out_path+"/"+file)
             
 if __name__ == '__main__':
     shutil.rmtree('out', ignore_errors=True)
