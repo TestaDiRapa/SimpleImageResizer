@@ -15,8 +15,6 @@ def resize_recursive(in_path, out_path):
             image = Image.open(in_path+"/"+file)
             image.thumbnail(ratio)
             image.save(out_path+"/"+file, "PNG")
-        else:
-            copyfile(in_path+"/"+file, out_path+"/"+file)
             
 if __name__ == '__main__':
     shutil.rmtree('out', ignore_errors=True)
